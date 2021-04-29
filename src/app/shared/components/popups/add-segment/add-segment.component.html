@@ -1,0 +1,99 @@
+<div class="popup" *ngIf="type">
+  <div class="popup-content">
+    <div class="popup-header">
+      <div class="title">Add a {{ type }}</div>
+      <img src="assets/icons/close.svg" (click)="onCancel()" alt="" />
+    </div>
+    <form
+      [formGroup]="type == 'segment' ? form : tableForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <div class="form-elements">
+        <div class="form-element">
+          <label for="name">Name <span>*</span></label>
+          <input
+            type="text"
+            name="name"
+            placeholder="Ex: Computer Software"
+            formControlName="name"
+          />
+        </div>
+        <div class="form-element">
+          <label for="name">Icon </label>
+          <div class="dropdown" #emojiDropdown>
+            <div
+              class="value"
+              tabindex="0"
+              #emojiRef
+              (click)="toggleEmojiDropdown()"
+            >
+              <ngx-emoji
+                [emoji]="selectedEmoji"
+                set="twitter"
+                size="30"
+                sheetSize="32"
+              ></ngx-emoji>
+              <img src="assets/icons/down-arrow.svg" alt="" />
+            </div>
+            <div class="options" [hidden]="!emojiDropdownToggle">
+              <emoji-mart
+                sheetSize="32"
+                set="twitter"
+                darkMode="false"
+                (emojiClick)="addEmoji($event)"
+                title="Pick your emoji…"
+                emoji="point_up"
+              ></emoji-mart>
+            </div>
+          </div>
+        </div>
+        <div class="form-element" *ngIf="type == 'segment'">
+          <label for="description">Description </label>
+          <textarea name="description" formControlName="description"></textarea>
+        </div>
+        <div class="form-element" *ngIf="type == 'table'">
+          <label for="name">Color</label>
+          <div class="dropdown" #colorDropdown>
+            <div
+              class="value"
+              tabindex="0"
+              #colorRef
+              (click)="toggleColorDropdown()"
+            >
+              <div
+                class="selected-color"
+                #selectedColor
+                [ngStyle]="{ 'background-color': 'rgba(0, 84, 209, 1)' }"
+              ></div>
+              <img src="assets/icons/down-arrow.svg" alt="" />
+            </div>
+            <div class="colors" *ngIf="colorDropdownToggle">
+              <div
+                class="color"
+                (click)="onSelectColor(color)"
+                [ngStyle]="{ 'background-color': color }"
+                *ngFor="let color of colors"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-submit">
+        <div class="save button-regular-fill">
+          <button
+            type="submit"
+            [disabled]="
+              (!form.valid && type == 'segment') ||
+              (!tableForm.valid && type == 'table')
+            "
+          >
+            Save
+          </button>
+        </div>
+        <div class="cancel button-regular-outline">
+          <button type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

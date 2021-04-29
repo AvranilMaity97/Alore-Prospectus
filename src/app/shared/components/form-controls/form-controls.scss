@@ -1,0 +1,220 @@
+.form-element {
+  label {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    height: 14px;
+    color: #3c3c3c;
+    position: relative;
+    padding-left: 2px;
+    span {
+      position: relative;
+      top: 0px;
+    }
+  }
+  input {
+    padding: 13px 6px;
+    margin-top: 8.7px;
+    height: 40px;
+    width: 100%;
+    background: #ffffff;
+    border: 0.5px solid #888888;
+    border-radius: 3px;
+    outline: none;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  textarea {
+    padding: 13px 14px;
+    margin-top: 9.7px;
+
+    width: 470px;
+    height: 124.83px;
+
+    background: #ffffff;
+    border: 0.5px solid #888888;
+    outline: none;
+    resize: none;
+    border-radius: 3px;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
+    color: #3c3c3c;
+  }
+  .dropdown {
+    position: relative;
+    cursor: pointer;
+    .value {
+      display: flex;
+      align-items: center;
+      padding: 0px 10px;
+      margin-top: 8.7px;
+      height: 40px;
+      width: 100%;
+      background: #ffffff;
+      border: 0.5px solid #888888;
+      border-radius: 3px;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 18px;
+      position: relative;
+      span::after {
+        content: "\1F605";
+      }
+      img {
+        position: absolute;
+        top: 15.07px;
+        right: 19.22px;
+      }
+      ngx-emoji {
+        width: 30px;
+        height: 30px;
+      }
+      .selected-color {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+      }
+    }
+    .options {
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      z-index: 1;
+      margin-top: 3px;
+
+      ::ng-deep emoji-mart {
+        section {
+          width: 100% !important;
+        }
+        .emoji-mart-preview {
+          display: none;
+        }
+      }
+    }
+    .colors {
+      position: absolute;
+      top: 100%;
+      width: 235px;
+      z-index: 1;
+      background-color: white;
+      border: 0.5px solid #888888;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+      padding: 15px 10px;
+      display: grid;
+      grid-template-columns: auto auto auto auto auto;
+      grid-gap: 15px;
+      position: absolute;
+      justify-content: space-evenly;
+      border-radius: 3px;
+      margin-top: 3px;
+      .color {
+        border-radius: 10px;
+        width: 20px;
+        height: 20px;
+      }
+      .color:hover {
+        box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+  input:focus,
+  textarea:focus {
+    border: 2px solid #334bfa;
+  }
+  .dropdown {
+    .value:focus {
+      border: 2px solid #334bfa;
+      outline: none;
+    }
+  }
+}
+.button-block-fill {
+  padding: 0px 18px;
+  width: 100%;
+  height: 35px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: none;
+  outline: none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 12px;
+  color: #ffffff;
+  background: #334bfa;
+  border-radius: 5px;
+  cursor: pointer;
+  img {
+    margin-right: 10px;
+  }
+}
+.button-regular-fill {
+  button {
+    padding: 0px 18px;
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #ffffff;
+    background: #334bfa;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:disabled {
+    background-color: rgba(60, 60, 60, 0.5);
+    cursor: initial;
+  }
+}
+.button-regular-outline {
+  button {
+    padding: 0px 18px;
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    background-color: #ffffff;
+    color: #334bfa;
+    border: 2px solid #334bfa;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:disabled {
+    background-color: rgba(60, 60, 60, 0.5);
+    cursor: initial;
+  }
+}
+.button-sq-outline {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  background: #ffffff;
+  border: 2px solid #3c3c3c;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.button-sq-outline:hover {
+  border: 2px solid #334bfa;
+  box-shadow: 0px 5px 5px rgba(51, 75, 250, 0.25);
+}
+::placeholder {
+  color: rgba(60, 60, 60, 0.3);
+}

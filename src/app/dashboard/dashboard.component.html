@@ -1,0 +1,133 @@
+<div class="dashboard">
+  <div class="sidebar">
+    <div class="fixed-section">
+      <div class="top-controls">
+        <img src="assets/icons/prospector.svg" alt="" />
+      </div>
+      <div class="bottom-controls">
+        <img src="assets/icons/menu.svg" alt="" />
+        <img src="assets/icons/notifications.svg" alt="" />
+        <div class="user-image">
+          <img src="assets/icons/user.svg" alt="" />
+          <img class="alert" src="assets/icons/alert.svg" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="drawer-section">
+      <div class="section-header">Prospector</div>
+      <div class="search-box">
+        <input
+          type="text"
+          [(ngModel)]="searchString"
+          placeholder="Search for a table or a segment"
+        />
+      </div>
+      <div class="segments">
+        <p class="segment-header">SEGMENTS</p>
+        <div
+          class="no-segments"
+          *ngIf="
+            segments.length == 0 ||
+            (segments | filter: searchString).length == 0
+          "
+        >
+          No segments available
+        </div>
+        <div
+          class="segment"
+          (click)="scrollToView(segment.id)"
+          tabindex="0"
+          *ngFor="let segment of segments | filter: searchString"
+        >
+          <ngx-emoji
+            [emoji]="segment.icon"
+            set="twitter"
+            size="18"
+            sheetSize="32"
+          ></ngx-emoji>
+          <div class="segment-name">{{ segment.name }}</div>
+        </div>
+      </div>
+      <div class="add-segment">
+        <button
+          type="button"
+          class="button-block-fill"
+          (click)="toggleSegmentPopup(false, 'segment')"
+        >
+          <img src="assets/icons/add.svg" alt="" />
+          Add a segment
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="content-area">
+    <div class="action-pannel">
+      <div class="dropdown">
+        <img class="list" src="assets/icons/list.svg" alt="" />
+        <img src="assets/icons/down-arrow.svg" alt="" />
+      </div>
+
+      <img src="assets/icons/actions.svg" alt="" />
+    </div>
+    <div class="line-hr"></div>
+    <div class="segment-container">
+      <div
+        class="segment-content"
+        [id]="segment.id"
+        *ngFor="let segment of segments; let i = index"
+      >
+        <div class="segment-header">
+          <ngx-emoji
+            [emoji]="segment.icon"
+            set="twitter"
+            size="30"
+            sheetSize="32"
+          ></ngx-emoji>
+          <p>{{ segment.name }}</p>
+          <img src="assets/icons/down-arrow.svg" alt="" />
+        </div>
+        <div
+          class="tables"
+          (resized)="setTableDisplay(segment, i)"
+          #tablesContainerRef
+        >
+          <div class="table" *ngFor="let table of segment.tables">
+            <div
+              class="dot"
+              [ngStyle]="{ 'background-color': table.color }"
+            ></div>
+            <div
+              class="table-emoji"
+              [ngStyle]="{ border: '2px solid ' + table.color }"
+            >
+              <ngx-emoji
+                [emoji]="table.icon"
+                set="twitter"
+                size="30"
+                sheetSize="32"
+              ></ngx-emoji>
+            </div>
+            <div class="table-name">{{ table.name }}</div>
+          </div>
+          <div class="add-table">
+            <button
+              type="button"
+              class="button-sq-outline"
+              (click)="toggleSegmentPopup(false, 'table', segment.id)"
+            >
+              <div class="tooltip">Add a new table</div>
+              <img class="dark" src="assets/icons/add-dark.svg" alt="" />
+              <img class="blue" src="assets/icons/add-blue.svg" alt="" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<popup-add-segment
+  *ngIf="popupToggle"
+  [type]="popupType"
+  class="popup"
+  (value)="toggleSegmentPopup($event)"
+></popup-add-segment>
